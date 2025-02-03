@@ -1,0 +1,29 @@
+extends ../layout/index
+
+block contenido 
+    body.bg-gray-500
+        div.pb-3.text-gray-900
+            h1.text-5xl.my-5.font-normal.mb-5 Hanner
+                span.font-bold Raíces
+            h2.text-center.text-2xl.text-gray-800.font-normal.mb-5 Inicia sesión y descubre nuevas propiedades
+
+        div.bg-white.max-w-md.mx-auto.p-5.rounded-lg.shadow-lg.text-left
+            form(action="/register" method="post")
+                div.mb-4
+                    label(for="email").block.text-gray-700.font-bold.mb-2 Correo Electrónico
+                    input#email(type="email" name="email" placeholder="Ingresa tu correo electrónico" class="w-full px-4 py-2 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                div.mb-4
+                    label(for="password").block.text-gray-700.font-bold.mb-2 Contraseña
+                    input#password(type="password" name="password" placeholder="Ingresa tu contraseña" class="w-full px-4 py-2 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                button(type="submit" class="w-full bg-blue-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800")
+                    | Iniciar Sesión
+                div.m-4.grid
+                    p.text-center.text-gray-700.mt-4.font-normal ¿No tienes una cuenta? 
+                       a(href="/auth/registro" class="text-blue-500 hover:underline font-normal mb-2") Crear una
+
+                    p.text-center.text-gray-700.mt-4.font-normal ¿Olvidaste la contraseña? 
+                        a(href="/auth/recuperar-cuenta" class="text-blue-500 hover:underline font-normal ") Recuperar
+
+

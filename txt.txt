@@ -1,0 +1,189 @@
+npm start
+npm run dev
+
+DEPENDENCIAS: Son las generales del proyecto 
+    Express
+    DevDependencias: Usadas al momento de desarrollar
+    npmmon
+
+COMENZAR EL PROYECTO
+    CREAR UN SERVIDOR EN EXPRESS
+    1. Creamos y llamamos a la dependencia, Servidor 
+    2. Definir un puerto y arranacar el proy
+    3. definir routing, diferentes endpoints que soporta la app
+
+ROUTING Y PETICIONES
+    
+    1.Asignando la dependencia
+    2. instanciar el router
+    3. importar la conf en el archivo principal
+    4. realizar el get asociando las rutas
+    (Get busca la ruta en especifica, Use busca todas las que inicien con '/')
+
+    PROBAR ROUTING
+    thunder client
+    postman     VSC
+
+TEMPLATE ENGINE
+    1. Instalar dependencias
+    2. Importar dependencia en el archivo principal(habilitar PUG) con .set
+    3. Crear un archivo con la extension .pug
+    4. Crear un archivo con la extension .js que contenga la funcion que render
+
+    PASAR DATOS A TRAVES DE LA VISTA
+
+    MVC
+    MODEL: se encarga de las interacciones con la base de DATOS, obtener, eliminar, actualizar
+    VIEW: se encarga de la vista, mostrar la informacion
+    CONTROLLER: se encarga de la logica, obtener datos del modelo, pasar datos. Decide a que vista se va a pasar los datos. Comunica mdelos vista
+
+    ROUTER
+    Se encarga de registrar todas las URLs o endpoints del sitio
+
+AÑADIR rutas    
+    1. en le archivo de rutas, crear la ruta    
+        1. importar la funcion del CONTROLLER
+        2. anadir la ruta de la vista y la funcion a llamar con .get
+    2. crear la funcion en el controlador
+        1. crear una const y colocar la url del render
+        2. llamar a la funcion del modelo
+        3. pasar los datos a la vista
+        4. realizar el exports
+   3. crear la vista     
+
+INSTALAR FRAMERWORK PARA EL CSS DEPENDENCIAS DE DESARROLLADOR
+    1. correr en terminar npm i -D tailwindcss autoprefixer postcss postcss-cli
+    2. crear una carpeta .css y llamar a las directivas 
+        @tailwind base;
+        @tailwind componets;
+        @tailwind utilities;
+    3. npx tailwindcss init -p
+    4. ajustar el archivo tailwind.config.js en content y colocar la carpeta donde estan las views;   content:   content: ['./views/**/*.pug'],
+    5. crear el script  
+        "css": "postcss public/css/tailwind.css -o public/app.css --watch"
+    6. remombrar los archivos postcss.config.js a postcss.config.cjs
+
+CREAR LAYOUT
+    1. crear carpeta LAYOUT
+        pug tailwind css intellinSence 
+    2. crear archivo layout.pug
+    3. llamar al layout en el login.pub
+        extends ../
+
+ASEGURATE DE QUE LAS CARPETAS COINCIDAN CON SUS UBICACION REAAAAAAAAAL 
+
+div.py-10
+        h1.text-5xl.my-10.font-extrabold.text-center Hanner
+            span Inmobiliaria
+        h2.text-center.text-2xl= pagina
+
+        div.nt-8.mx-auto.max-w-md
+            div.py-10.bg-white.py-8.px-4.shadow
+            text jola
+
+
+div.mb-4
+    label(for="confirm_password").block.text-gray-700.font-bold.mb-2 Confirmar Contraseña
+    input#confirm_password(type="password" name="confirm_password" placeholder="Confirma tu contraseña" 
+    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+
+TRABAJAR CON ORM
+    INSTALACIÓN
+        terminal npm i sequelize mysql2
+    
+    CONFIG  
+        1. crear archico para la configuracion .js
+        2. import Sequelize from 'sequelize'
+        3. instanciar  const db = new Sequelize(), esta es la const que nos va a permitir conectarnos con la db
+
+    INSTANCIAR EN EL PROYECTO
+        1. crear un import para la db
+    
+    OCULTAR LA INF DE LA DB EN VAR DE ENTORNO
+        1. npm i dotenv. paquete de var de entorno
+        2. crear archivo .env
+        3. exportar la variable de entorno en el archivo .env
+        4. importar la variable de entorno en el archivo .env
+        5. instanciar la db con la variable de entorno  import dotenv from 'dotenv'
+        decir ubicacion del archivo .env dotenv.config({path: '.env'})
+        6. exportar la db en el archivo .env
+
+EMPEZAR A TRABAJAR CON ORM  
+    inicial
+        1. importar el ORM con el que estamosa trabajando import { DataTypes } from 'sequelize'
+        2. importar la db
+    defirnir Clase
+        1. definimos un nuevo modelo conts Usuario = db.define('usuarios')
+        2. definimos las columnas del modelo Usuario
+        3, en el index realizar un db.syns(), que es la instruccion para crear la tabla si aun no existe
+
+    TRABAJAR
+        1. en el index.js habilitar lectura de dats de formulario de express        app.use( express.urlencoded({extended: true}) ) 
+        3. configuramos el method POST y la accion en el formu en relacion con el routing       form(action="/auth/registro" method="POST" )
+        4. en el rauting creamos el metodo post que va a recibir de la vista y llamamos al metodo en el CONTROLLER          router.post('/registro', registrar)
+        5. en el controller habilitamos la const                const registrar = (req, res) => 
+            pd recordar exportar
+            pd el Middleware para parsear app.use( express.urlencoded({extended: true}) ), debe ser llamado antes de cualquier ruta que procese datos enviados a través de formularios
+        6. importar el modelo en el controller a usarlo
+        7. instanciar el objeto user un const user = await Usuario.create(req.body); lo que hace es crear la columna en la db
+
+VALIDAR CON ORM
+    previo
+        1. npm i express-validator
+        2. importar dependencia  import { check, validationResult } from 'express-validator' en el controller
+    validar
+    mostar resultados en la vista
+    mantener los campos que esten buenos
+
+    ENCRIPTAR Contraseña
+        1. descargar dependencia de desarrollo npm i bcrypt
+        2. definir el hooks en la clase usuario, 
+            importar libreria bcrypt
+                hooks:{
+                    beforeCreate: async function (user) {
+                        const salt = await bcrypt.genSalt(10)
+                        user.password = await bcrypt.hash(user.password, salt)  
+                    }}
+    
+    CREAR TOKEN UNICO POR Usuario
+        1. crear fichero auxiliar, HELPERS token
+        2. exportar funciones del fichero3. 
+        3. usar fichero
+
+    CORREO DE VERIFICACION
+        1. configurar un servicio de correo
+            1. crear variables .env asociadas a mailtrap
+            2. instalar dependencia npm i nodemailer
+            3. configurar el HELPER 
+                    const transport = nodemailer.createTransport({
+                    host: process.env.EMAIL_HOST,
+                    port: process.env.EMAIL_PORT,
+                    auth: {
+                    user: process.env.EMAIL_USERNAME,
+                    pass: process.env.EMAIL_PASSRWORD
+                    }
+                });
+        2. paso los datos del usuario creado en el controlador, al archivo HELPER 
+        3. extraer datos en el helper, email, name, token
+        4. crear la funcion para confirmar el email, crear la url dinamica /:token
+        5. pasar la url dinamica de confirmacion por el html
+    CONFIRMAFR CUENTA
+        1. crear la ruta y la vista de la pagina de confirmacion de cuenta
+        2. crear funcion async para confirmar
+        3. verificar si el token es correcto, tomar el token de la url
+        4. validar el token de la url con uno en la db
+        5. si es correcto, actualizar el token a null y el confirmado a true
+
+Protección CSRF
+    1. instalar dependencia npm i csurf cookie-parsear
+    2. importamos
+    3. habilitamos app.use( cookieParser() ); app.use( csrf( {cookie : true} ) )
+    4. crear token en el formulario de registro         csrfToken: req.csrfToken()
+    5. verificar token en el controlador
+
+RESETAR EL PASSWORD 
+    
+
+
+

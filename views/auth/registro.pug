@@ -1,0 +1,44 @@
+extends ../layout/index
+
+block contenido 
+    body.bg-gray-500
+        div.pb-3.text-gray-900
+            h1.text-5xl.my-5.font-normal.mb-5 Hanner
+                span.font-bold Raíces
+            h2.text-center.text-2xl.text-gray-800.font-normal.mb-5 Regístrate para descubrir nuevas propiedades
+
+        if(errores)
+            div.max-w-md.mx-auto.my-3.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative(role="alert")  
+                strong.font-bold Error(es) en la validación:
+                ul.list-disc.pl-5.text-left
+                    each error in errores
+                        li= error.msg
+
+        div.bg-white.max-w-md.mx-auto.p-5.rounded-lg.shadow-lg.text-left
+            form(action="/auth/registro" method="post" )
+                input(type="hidden" name="_csrf" value= csrfToken)
+                div.mb-4
+                    label(for="name").block.text-gray-700.font-bold.mb-2 Nombre Completo
+                    input#name(type="text" name="name" value= user ? user.name : '' placeholder="Ingresa tu nombre completo" 
+                    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                div.mb-4
+                    label(for="email").block.text-gray-700.font-bold.mb-2 Correo Electrónico
+                    input#email(type="email" name="email" placeholder="Ingresa tu correo electrónico" value= user ? user.email : ''
+                    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                div.mb-4
+                    label(for="password").block.text-gray-700.font-bold.mb-2 Contraseña
+                    input#password(type="password" name="password" placeholder="Ingresa tu contraseña" 
+                    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                div.flex.items-center.mb-4
+                    input#terms(type="checkbox" name="terms" class="mr-2")
+                    label(for="terms").text-gray-700.font-normal.text-gray-700 Acepto los términos y condiciones
+
+                button(type="submit" class="w-full bg-blue-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800")
+                    | Registrarse
+
+                p.text-center.text-gray-800.mt-4.font-normal ¿Ya tienes una cuenta? 
+                    a(href="/auth/login" class="text-blue-800 hover:underline ") Inicia sesión aquí
+
