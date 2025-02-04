@@ -183,7 +183,22 @@ Protección CSRF
     5. verificar token en el controlador
 
 RESETAR EL PASSWORD 
+    1. crear la funcion de resetPassword
+    2. crear la ruta y la vista de la pagina de reset( donde el usuario va a realizar la pedicion del cambio de contraseña
+            para ello vamos a pedir el correo)
+    3. validar correo de entrada
+    4. realizar busqueda en la db del email entrante de la url
+    5. validar que corre pertenezca a un usuario, y si no, mostrar errores en la misma vista    
+    6. si el correo pertenece a un usuario, enviar email de confirmacion
+    7. crear vista de correo enviado para reset de password
+    8. crear vista para el formulario de la nueva contraseña, eliminar el 
+        action del from para que caiga en el mismo form
     
+    9. validar nueva contraseña
+    10. identificar al usuario, en base al token de la url
+    11. tomar contrasena del post y hashearla
+    12. guardar cambios
 
 
 
+asasas
