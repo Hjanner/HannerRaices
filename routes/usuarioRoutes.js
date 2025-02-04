@@ -1,11 +1,15 @@
 import express from 'express';
-import { formLogin, formRegistro, formRecuperar, registrar, confirmar, resetPassword, comprobarToken, newPassword } from '../controllers/userController.js';
+import { formLogin, authenticate, formRegistro, formRecuperar, registrar, confirmar, 
+        resetPassword, comprobarToken, newPassword,    
+        } from '../controllers/userController.js';
 
 
 const router = express.Router();  
 
 //routing RUTAS
-router.get('/login', formLogin);
+router.get('/login', formLogin);    
+router.post('/login', authenticate);    
+
 
 router.get('/registro', formRegistro);
 router.post('/registro', registrar);

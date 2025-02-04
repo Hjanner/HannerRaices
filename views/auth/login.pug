@@ -7,8 +7,17 @@ block contenido
                 span.font-bold Raíces
             h2.text-center.text-2xl.text-gray-800.font-normal.mb-5 Inicia sesión y descubre nuevas propiedades
 
+        if(errores)
+            div.max-w-md.mx-auto.my-3.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative(role="alert")  
+                strong.font-bold Error(es) en la validación:
+                ul.list-disc.pl-5.text-left
+                    each error in errores
+                        li= error.msg
+
         div.bg-white.max-w-md.mx-auto.p-5.rounded-lg.shadow-lg.text-left
-            form(action="/register" method="post")
+            form(action="/auth/login" method="POST")
+                input(type="hidden" name="_csrf" value= csrfToken)
+
                 div.mb-4
                     label(for="email").block.text-gray-700.font-bold.mb-2 Correo Electrónico
                     input#email(type="email" name="email" placeholder="Ingresa tu correo electrónico" class="w-full px-4 py-2 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")

@@ -199,6 +199,10 @@ RESETAR EL PASSWORD
     11. tomar contrasena del post y hashearla
     12. guardar cambios
 
-
+autenticar login
+    1. importar jsonwebtoken
+    2. crear funcion de autenticacion, que reciba los datos que necesitamos, nada de datos sensibles
+    3. crear el token en el controller
+    
 
 asasas

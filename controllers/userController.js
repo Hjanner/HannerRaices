@@ -1,7 +1,7 @@
 import { body, check, validationResult } from 'express-validator';
 import User from '../models/Usuario.js';
-import { json } from 'sequelize';
-import { generarId } from '../helpers/tokens.js';
+import { json, where } from 'sequelize';
+import { generateJWT, generarId } from '../helpers/tokens.js';
 import { emailRegistro, emailOlvidoPassword } from '../helpers/email.js';
 import csurf from 'csurf';
 import bcrypt from 'bcrypt';
@@ -10,8 +10,58 @@ import bcrypt from 'bcrypt';
 //renderizando
 const formLogin = (req, res) => {
     res.render('auth/login', {
-        pagina: 'Iniciar Sesión'
+        pagina: 'Iniciar Sesión', 
+        csrfToken: req.csrfToken()                  //creando token de validacion de form que venga de la url
     })
+}
+
+const authenticate = async (req, res) => {
+    //validacion
+    await check('email').isEmail().normalizeEmail().withMessage('Correo no válido.').run(req)
+    await check('password').notEmpty().withMessage('La contraseña no debe estar vacía.').run(req)
+    let resultado = validationResult(req);    
+
+    if(!resultado.isEmpty){
+        return res.render('auth/login', {
+            pagina: 'Iniciar Sesión',
+            csrfToken: req.csrfToken(),
+            errors: result.array()
+        })
+    }
+
+    const {email, password} = req.body;
+    const user = await User.findOne({ where : {email}});
+
+    if(!user){
+        res.render('auth/login', {
+            pagina: 'Iniciar Sesión', 
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'El email no se encuentra registrado.'}]
+        })
+    }
+
+    if (!user.confirmado) {
+        res.render('auth/login', {
+            pagina: 'Iniciar Sesión', 
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'El usuario no se encuentra confirmado.'}]
+        })        
+    }
+
+    if( !user.verifyPassword(password) ){
+        res.render('auth/login', {
+            pagina: 'Iniciar Sesión', 
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: 'La contraseña es incorrecta.'}]
+        })  
+    }
+
+    //autenticar el usuario
+    const token = generateJWT({id: user.id, name: user.name});
+
+    return res.cookie('_token', token, {
+        httpOnly: true
+    }).redirect('/mis-propiedades')
 }
 
 const formRegistro = (req, res) => {
@@ -23,7 +73,7 @@ const formRegistro = (req, res) => {
     })
 }
 
-//   REGISTRANDO   funcion asincrona que revisa la db 
+//REGISTRANDO funcion asincrona que revisa la db 
 const registrar = async (req, res) => {
     //validacion
     await check('name').notEmpty().withMessage('El nombre es obligatorio.').run(req)
@@ -224,6 +274,7 @@ const newPassword = async (req, res) =>{
 
 export {
     formLogin,
+    authenticate,
     formRegistro,
     formRecuperar, 
     registrar,
