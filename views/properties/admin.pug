@@ -1,0 +1,15 @@
+extends ../layout/index
+
+block contenido 
+    body.bg-gray-500
+        div.pb-3.text-gray-900
+            h1.text-5xl.my-5.font-normal.mb-5 Hanner
+                span.font-bold Raíces
+            h2.text-center.text-2xl.text-gray-800.font-normal.mb-5 Mis Propiedades
+
+        if(errores)
+            div.max-w-md.mx-auto.my-3.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative(role="alert")  
+                strong.font-bold Error(es) en la validación:
+                ul.list-disc.pl-5.text-left
+                    each error in errores
+                        li= error.msg

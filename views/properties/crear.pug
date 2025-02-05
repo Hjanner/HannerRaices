@@ -1,0 +1,85 @@
+extends ../layout/index
+
+block styles 
+    link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
+block contenido 
+    body.bg-gray-500
+        div.pb-3.text-gray-900
+            h1.text-5xl.my-5.font-normal.mb-5 Registrar Propiedad
+
+        if(errores)
+            div.max-w-md.mx-auto.my-3.bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative(role="alert")  
+                strong.font-bold Error(es) en la validación:
+                ul.list-disc.pl-5.text-left
+                    each error in errores
+                        li= error.msg
+
+        div.bg-white.max-w-xl.mx-auto.p-5.rounded-lg.shadow-lg.text-left
+            form(action="/propiedades/registro" method="post")
+                input(type="hidden" name="_csrf" value= csrfToken)
+
+                div.mb-4
+                    label(for="nombrePropiedad").block.text-gray-700.font-bold.mb-2 Nombre de la Propiedad
+                    input#nombrePropiedad(type="text" name="nombrePropiedad" placeholder="Ingresa el nombre de la propiedad" 
+                    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                div(class="md:flex md:gap-6")
+                    div.mb-4(class='md:w-1/2')
+                        label(for="precio").block.text-gray-700.font-bold.mb-2 Precio
+                        input#precio(type="number" name="precio" placeholder="Ingresa el precio de la propiedad" 
+                        class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+
+                    div.mb-4(class='md:w-1/2')
+                        label(for="categoria").block.text-gray-700.font-bold.mb-2 Categoría
+                        select#categoria(name="categoria" class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+                            option(value="") - Seleccione -
+                            option(value="residencial") Residencial
+                            option(value="comercial") Comercial
+                            option(value="industrial") Industrial
+                            option(value="terreno") Terreno
+                            option(value="vacacional") Vacacional
+
+                div(class="md:flex md:gap-6 mb-4")
+                    div(class='md:w-1/3')
+                        label(for="habitaciones").block.text-gray-700.font-bold.mb-2 Habitaciones
+                        select#habitaciones(name="habitaciones" class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+                            option(value="") - Seleccione -
+                            - var n = 1;
+                                while n <= 8 
+                                    option(value=n) #{n++}
+
+                    div(class='md:w-1/3')
+                        label(for="estacionamiento").block.text-gray-700.font-bold.mb-2 Estacionamiento
+                        select#estacionamiento(name="estacionamiento" class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+                            option(value="") - Seleccione -
+                            - var n = 1;
+                                while n <= 5
+                                    option(value=n) #{n++}
+
+                    div(class='md:w-1/3')
+                        label(for="wc").block.text-gray-700.font-bold.mb-2 WC
+                        select#wc(name="wc" class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500")
+                            option(value="" class="text-grey-700") - Seleccione -
+                            - var n = 1;
+                                while n <= 5 
+                                    option(value=n) #{n++}
+
+                div.mb
+                    label(for="descripcion").block.text-gray-700.font-bold.mb-2 Descripción
+                    textarea#descripcion(name="descripcion" placeholder="Ingresa una descripción de la propiedad" 
+                    class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4")
+
+                #map.h-96.mt-6
+
+                div.mb-4.mt-8
+                    button(type="submit" class="w-full bg-blue-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800") Registrar
+
+
+
+block script 
+    script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js")
+    script(src="/js/map.js")

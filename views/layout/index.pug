@@ -5,7 +5,16 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Hanner Raíces | #{pagina}
         link(rel="stylesheet", href="/app.css")
+        block styles                 
+        
     body.min-h-screen.bg-gray-50 
+
+        if(header)
+            include header 
 
         main.mx-auto.container.nt-10.px-2.text-center
             block contenido 
+
+        block script 
+
+            //- crear header, con cerrar sesion, mi perfil, mis propiedades si if(header == true

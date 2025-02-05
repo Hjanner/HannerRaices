@@ -1,6 +1,9 @@
 npm start
 npm run dev
 
+npm i -D concurrently. para correr css and js al mismo tiempo
+    en package.json - script - anadir,     "dev": "concurrently \"npm run css\" \"npm run js\""
+
 DEPENDENCIAS: Son las generales del proyecto 
     Express
     DevDependencias: Usadas al momento de desarrollar
@@ -203,6 +206,12 @@ autenticar login
     1. importar jsonwebtoken
     2. crear funcion de autenticacion, que reciba los datos que necesitamos, nada de datos sensibles
     3. crear el token en el controller
+
+EJECUTAR SCRIPts
+    MOSTRAR MAPA
+     https://gist.github.com/codigoconjuan/43252f6d5d80dbc0b5f8390086a54ac8
     
 
 asasas
+
+

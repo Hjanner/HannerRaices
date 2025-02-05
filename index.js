@@ -3,6 +3,7 @@ import express from 'express'
 import csrf from 'csurf'
 import cookieParser from 'cookie-parser'    
 import usuariosRouters from './routes/usuarioRoutes.js'
+import propertiesRouters from './routes/propertiesRoutes.js'
 import db from './config/db.js'
 
 //crear app, serv.                                  // esta es la instancia de nuestra app de express
@@ -26,6 +27,7 @@ app.use( express.static('public') )
 
 //routing
 app.use('/auth', usuariosRouters);
+app.use('/', propertiesRouters);
 
 //conexion db
 try{
