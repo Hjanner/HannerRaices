@@ -70,7 +70,16 @@ block contenido
                     textarea#descripcion(name="descripcion" placeholder="Ingresa una descripción de la propiedad" 
                     class="w-full px-4 py-1 font-normal border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4")
 
-                #map.h-96.mt-6
+                div.mb.mt-4
+                    label(for="ubicacion").block.text-gray-700.font-bold.mb-2 Ubica la propiedad en el mapa
+
+                #map.h-96.mt-4
+
+                div.mb.mt-4
+                    p.calle
+                    input(type="hidden", name="calle", id="calle")
+                    input(type="hidden", name="lat", id="lat")
+                    input(type="hidden", name="lng", id="lng")
 
                 div.mb-4.mt-8
                     button(type="submit" class="w-full bg-blue-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-800") Registrar

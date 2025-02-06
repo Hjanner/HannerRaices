@@ -210,6 +210,21 @@ autenticar login
 EJECUTAR SCRIPts
     MOSTRAR MAPA
      https://gist.github.com/codigoconjuan/43252f6d5d80dbc0b5f8390086a54ac8
+
+     anadir bloques de librerias en las paginas que van a usar el MAPA
+     block script 
+    script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet@3.0.8/dist/esri-leaflet.js")
+    script(src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js")
+    script(src="/js/map.js")
+
+    y los estilos
+        link(rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
+
+    configurar el map.js
+
     
 
 asasas
