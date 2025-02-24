@@ -1,6 +1,6 @@
-import { DataTypes } from "sequelize";  
-import bcrypt from 'bcrypt'
-import db from '../config/db.js'
+import { DataTypes } from "sequelize";                  //representa tipos de objetos de base de daos
+import bcrypt from 'bcrypt';                            //para encriptar contrasenhas
+import db from '../config/db.js'                        // instancia de la base de datos
 
 const User = db.define('usuarios', {
     name:{

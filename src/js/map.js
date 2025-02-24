@@ -1,6 +1,6 @@
 (function() {
-    const lat = 8.29755990497009;
-    const lng = -62.71151127857323;
+    const lat = document.querySelector('#lat').value || 8.29755990497009;
+    const lng = document.querySelector('#lng').value || -62.71151127857323;
     const map = L.map('map').setView([lat, lng ], 16);
     
     //utilizar provider y geocode

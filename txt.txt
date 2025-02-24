@@ -225,8 +225,34 @@ EJECUTAR SCRIPts
 
     configurar el map.js
 
+CREACION DE SEEDERS
+    1. crear categorias.js que va a contener lo que se va a cargar en la db
+    2. crear seeder.js e 
+    3. llamar el side, en el package.js crear     "db:importar": "node ./seed/seeder.js -i"
+    4. en el seeder.js crear   //
+        if(process.argv[2] === "-i"){
+            importarDatos();
+        }
+        para ejecutar el llamado
+    5. ejecutar el comando en la terminal npm run db:importar
+    6. funcion para borrar datos de la db
     
+ASOSIACIONES
+    1. crear unj archivo llamado index.js en /modelos
+    2. importar los modelos
+    3. crear las asociaciones
+    4. exportar el modelo con las asociaciones 
+
+
+VALIDACIONES EN EL RAUTER
+    1. importar xpressValidator en el rauting, import { body,  } from 'express-validator';
+    2. crear las validaciones en el rauting
+    3. importar el controller import { validationResult } from 'express-validator'; para mostrar errores
+    4. llamar el crsf en la vista y en la funcion que llama a la vista
+    5. dejar los campos que fueron llenados de forma correcta en el formulario  
+        
 
 asasas
 
 
+google api key AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik
