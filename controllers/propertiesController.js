@@ -53,30 +53,29 @@ const guardar = async(req, res) =>{
             datos: req.body,
             errores: validacion.array()
         })
-    }
+    }    
 
     //crear un registro
-   const { titulo, description, habitaciones, estacionamiento, wc, calle, lat, lng, precio: priceId, categoria: caregoryId, usuario} = req.body;
-
-   console.log(req.body);
-   
-
+   const { titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: priceId, categoria: caregoryId, usuario} = req.body;   
+   const {id: usuarioId} = req.user;
     try {
         const propertySave = await Property.create({
             titulo,
-            description,
+            descripcion,
             habitaciones,
             estacionamiento,
             wc,
             calle, 
             lat,
             lng,
-            precio,
-            categoria,
+            priceId,
+            caregoryId,
+            usuarioId,
+            imagen: ''
         })
 
     } catch (error) {
-        //console.log(error);
+        console.log(error);
     }
 }
 

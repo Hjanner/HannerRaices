@@ -1,12 +1,18 @@
 import express from 'express'
+
+import protectRouter from '../middelware/protectRoute.js';
+
 import { body,  } from 'express-validator';
 import { admin, crear, guardar } from '../controllers/propertiesController.js'
 
+
+
 const router = express.Router();
 
-router.get('/mis-propiedades', admin);
-router.get('/mis-propiedades/crear', crear);
-router.post('/mis-propiedades/crear',  
+router.get('/mis-propiedades', protectRouter, admin);
+router.get('/propiedades/crear',protectRouter,  crear);
+router.post('/propiedades/crear',  
+    protectRouter,
     body('titulo').notEmpty().withMessage('El título es obligatorio.'),  
     body('descripcion')
         .notEmpty().withMessage('La descripción es obligatoria.')

@@ -19,10 +19,17 @@ const User = db.define('usuarios', {
     confirmado: DataTypes.BOOLEAN
 }, {
     //aqui va a pasar despues de darle al boton de enviar al momento de crear el usuario, y va a tomar la password para hashearla
+    //los hooks son funciones que puedes anadir a cierto modelo
     hooks:{
         beforeCreate: async function (user) {
             const salt = await bcrypt.genSalt(10)
             user.password = await bcrypt.hash(user.password, salt)  
+        }
+    },
+    //scopes sirve para eliminar ciertos parametros al realizar una consulta
+    scopes:{
+        deletePassword: {
+            attributes: { exclude: ['password', 'token', 'createdAt', 'updatedAt', 'confirmado'] }
         }
     }
 })

@@ -10,8 +10,6 @@ Property.belongsTo(Price);                      //crear asociacion
 Property.belongsTo(Category);
 Property.belongsTo(Usuario);
 
-
-
 export {
     Property,
     Category,

@@ -60,7 +60,8 @@ const authenticate = async (req, res) => {
     const token = generateJWT({id: user.id, name: user.name});
 
     return res.cookie('_token', token, {
-        httpOnly: true
+        httpOnly: true,
+        //expires: 
     }).redirect('/mis-propiedades')
 }
 

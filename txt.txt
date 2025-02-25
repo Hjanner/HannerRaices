@@ -250,7 +250,14 @@ VALIDACIONES EN EL RAUTER
     3. importar el controller import { validationResult } from 'express-validator'; para mostrar errores
     4. llamar el crsf en la vista y en la funcion que llama a la vista
     5. dejar los campos que fueron llenados de forma correcta en el formulario  
-        
+
+MIDDLEWARE 
+    MANEJOS DE INICIO DE SESION
+        //1. anadir una duracion al token de inisio de sesion del usuario
+        2. anadir un middleware para verificar el token de inicio de sesion
+            1. verificar que existe el token, 
+            2. validar con jwt.verify()
+
 
 asasas
 
